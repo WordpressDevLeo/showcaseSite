@@ -1,0 +1,1154 @@
+<html lang="en-US">
+<head>
+    <link href="prism.css" rel="stylesheet" />
+    <style>
+.section{
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    margin-bottom: 10%;
+    background-color: #252822;
+    
+}
+
+
+/*.factsContainer{
+    
+}*/
+
+
+body {
+   margin: 0;
+   padding: 0;
+   overflow-x: hidden;
+}
+
+
+
+
+
+
+/*https://stackoverflow.com/questions/17115344/absolute-positioning-ignoring-padding-of-parent*/
+/*.stickyRevealer{
+    position: sticky;
+    border: 1px solid red;
+    display: flex;
+    width: 100%;
+    height: 50vh;
+    overflow: hidden;
+    top: 50vh;
+}
+.left{
+    border: 1px solid purple;
+    background-color: blue;
+    clip-path: polygon( 0% 0%, 100% 100%, 0% 100% );
+    margin-top: -1px;
+    
+    z-index: 2;
+}*/
+
+.codeSection {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: vertical;
+    align-items: start;
+    flex-wrap: wrap;
+    scrollbar-width: none;
+}
+.codeSection_codeText{
+    position:absolute;
+    width: 100%;
+    height: 100%;
+    align-self: center;
+    overflow-x: scroll;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    overscroll-behavior: auto;
+}
+
+.codeSection_absoluteRevealer{
+    position: absolute;
+    width: 100%;
+    height: 50vh;
+    overflow: hidden;
+
+    background-color: #72905b;
+    clip-path: polygon( 0% 0%, 0% 0%, 100% 0%, 100% 100% );
+    z-index: 1;
+    transition: all 1s ease-out;
+    
+}
+.codeSection_stickyRevealer{
+    overflow: hidden;
+    
+    position: sticky;
+    width: 100%;
+    height: 50vh;
+    clip-path: polygon( 0% 0%, 0% 0%, 100% 100%, 0% 100% );
+    z-index: 1;
+    background-color: #222b1b;
+    top: 50vh;
+
+    transition: all 1s ease-out;
+}
+.codeSection_stickyRevealer_transition_hover{
+    clip-path: polygon( 0% 50%, 50% 100%, 50% 100%/*extra one*/, 0% 100% );
+    opacity: 0.7;
+    background-color: #72905b;
+}
+.codeSection_absoluteRevealer_transition_hover{
+    clip-path: polygon( /*extra one*/50% 0%, 50% 0%, 100% 0%, 100% 50%  );
+    opacity: 0.7;
+    background-color: #222b1b;
+}
+.codeSection_stickyRevealer_transition_click{
+    clip-path: polygon( 0% 80%, 100% 80%, 100% 100%/*extra one*/, 0% 100% );
+    /*remember: stickyRevealer point coordinates are also measured with upper left coordinate system -> thats why other % numbers*/
+    opacity: 0.7;
+    background-color: black;
+}
+.codeSection_absoluteRevealer_transition_click{
+    clip-path: polygon( /*extra one*/0% 20%, 0% 0%, 100% 0%, 100% 20%  );
+    opacity: 0.7;
+    background-color: black;
+}
+
+/*
+animations/transitions:
+fade in
+appear from bottom
+appear from sides
+turn!
+scaling numbers!
+how to implement code?
+
+<div class="factsContainer">
+*/
+.tangramSection {
+    position:relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #d8d6d3;
+}
+.tangramSection_tangramWrapper{
+    position: relative;
+    width: calc(20vh + 10vw);
+    height: calc(20vh + 10vw);
+    display: flex;
+    /*may use shrink*/
+    /*all points of polygons are written following: !upper left, down left, down right, upper right
+    this may change with moving*/
+    /*prob will need to position elements and not move with clip-path*/
+    /*maybe shrink and grow elements(by changing width and height) depending on arrangement size? use total lenght then and calculate how much shrinking/growing is needed*/
+}
+.tangramSection_tangramElement{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transition: all 1s ease-out;
+    transform-origin: 0% 100%;
+}
+
+/*all are squished in corner trapez is laying on x-axis
+sqrt of 0.5 = 70.7107 sqrt of 0.125 = 35.3553*/
+
+/*
+.tangramSection_14triangle1
+.tangramSection_14triangle2
+.tangramSection_18square
+.tangramSection_18trapez
+.tangramSection_18triangle
+.tangramSection_116triangle1
+.tangramSection_116triangle2
+
+*/
+
+
+ .tangramSection_14triangle1{
+    clip-path: polygon( 0% 29.2893%, 0% 100%, 70.7107% 100%);
+    background-color: red;
+    opacity: 0.8;
+    z-index: 1;
+    
+}
+.tangramSection_14triangle2{
+    clip-path: polygon( 0% 29.2893%, 0% 100%, 70.7107% 100%);
+    background-color: red;
+    opacity: 0.4;
+}
+.tangramSection_18square{
+    clip-path: polygon(0% 64.6447%, 0% 100%, 35.3553% 100% , 35.3553% 64.6447% );
+    background-color: green;
+    opacity: 0.8;
+}/*25% 50%, 0% 75%, 25% 100%, 50% 75%*/
+.tangramSection_18trapez{
+    clip-path: polygon(25% 75%, 0% 100%, 50% 100%, 75% 75% );
+    background-color: green;
+    opacity: 1;
+}
+.tangramSection_18triangle{
+    clip-path: polygon( 0% 50%, 0% 100%, 50% 100%);
+    background-color: purple;
+    opacity: 0.4;
+}
+.tangramSection_116triangle1{
+    clip-path: polygon( 0% 64.6447%, 0% 100%, 35.355% 100%);
+    background-color: yellow;
+    opacity: 0.8;
+}
+.tangramSection_116triangle2{
+    clip-path: polygon(  0% 64.6447%, 0% 100%, 35.355% 100%);
+    background-color: yellow;
+    opacity: 0.4;
+}
+                        /*all transitions moved for better code readability*/
+                                .test{}
+                                    .tangramSection_14triangle1_transition_standart{
+                                        /*tri1 left, trapez left, tri2 middle, square, tri3between, tri4 right, tri5 upper right*/
+                                        /* bottom of wrapper is appareantly margin-top=0 no clue */
+                                        margin-top: -50%;
+                                        margin-left: 50%;
+                                        transform: rotate(-45deg);
+                                        
+                                    }
+                                    .tangramSection_14triangle2_transition_standart{
+                                        margin-top: -50%;
+                                        margin-left: 50%;
+                                        transform: rotate(45deg);
+
+                                    }
+                                    .tangramSection_18square_transition_standart{
+                                        margin-top: -50%;
+                                        margin-left: 50%;
+                                        transform: rotate(135deg);
+                                    }
+                                    .tangramSection_18trapez_transition_standart{
+                                        margin-top: -100%;
+                                        margin-left: -0%;
+                                        transform: rotate(90deg);
+                                        
+                                    }
+                                    .tangramSection_18triangle_transition_standart{
+                                        margin-top: 0%;
+                                        margin-left: 0%;
+
+                                    }
+                                    .tangramSection_116triangle1_transition_standart{
+                                        margin-top: -50%;
+                                        margin-left: 50%;
+                                        transform: rotate(-135deg);
+
+                                    }
+                                    .tangramSection_116triangle2_transition_standart{
+                                        margin-top: -25%;
+                                        margin-left: 75%;
+                                        transform: rotate(135deg);
+                                    }
+
+
+
+
+
+                                    .tangramSection_14triangle1_transition_whale{
+                                        margin-top: -70.7107%;
+                                        margin-left: 29.2893%;
+                                        transform: rotate(180deg);
+                                    }
+                                    .tangramSection_14triangle2_transition_whale{
+                                    margin-top: 0;
+                                    margin-left: 29.2893%;
+                                    transform: rotate(0deg);
+                                    }
+                                    .tangramSection_18square_transition_whale{
+                                    margin-top: -25%;
+                                    margin-left: 75%;
+                                    transform: rotate(45deg);
+                                    }
+                                    .tangramSection_18trapez_transition_whale{
+                                    margin-top: 0;
+                                    margin-left: 29.2893%;
+                                    transform: rotate(-135deg);
+                                    }
+                                    .tangramSection_18triangle_transition_whale{
+                                    margin-top: -75%;
+                                    margin-left: 125%;
+                                    transform: rotate(-45deg);
+                                    }
+                                    .tangramSection_116triangle1_transition_whale{
+                                    margin-top: -25%;
+                                    margin-left: 75%;
+                                    transform: rotate(-45deg);
+                                    }
+                                    .tangramSection_116triangle2_transition_whale{
+                                    margin-top: -50%;
+                                    margin-left: 100%;
+                                    transform: rotate(45deg);
+                                    }
+
+
+
+                                    .tangramSection_14triangle1_transition_bear{
+                                        margin-top: -50%;
+                                        margin-left: -50%;
+                                        transform: rotate(45deg);
+                                    }
+                                    .tangramSection_14triangle2_transition_bear{
+                                        margin-top: -100%;
+                                        margin-left: 0;
+                                        transform: rotate(90deg);
+                                    }
+                                    .tangramSection_18square_transition_bear{
+                                        margin-top: -100%;
+                                        margin-left: 70.7107%;
+                                        transform: rotate(90deg);
+                                    }
+                                    .tangramSection_18trapez_transition_bear{
+                                        margin-top: -50%;
+                                        margin-left: 35.355%;
+                                        transform: rotate(45deg);
+                                        
+                                    }
+                                    .tangramSection_18triangle_transition_bear{
+                                        margin-top: -50%;
+                                        margin-left: 70.7107%;
+                                        transform: rotate(-90deg);
+                                    }
+                                    .tangramSection_116triangle1_transition_bear{
+                                        margin-top: 10%;
+                                        margin-left: -25.355%;
+                                        transform: rotate(0deg);
+                                    }
+
+                                    .tangramSection_116triangle2_transition_bear{
+                                        margin-top: -64.6447%;
+                                        /*70.7107%+35.355%*/
+                                        margin-left: 106.06%;
+                                        transform: rotate(0deg);
+                                    }
+
+
+                                    .tangramSection_14triangle1_transition_cat{
+                                        margin-top: -100%;
+                                        margin-left: 50%;
+                                        transform: rotate(135deg);
+                                    }
+                                    .tangramSection_14triangle2_transition_cat{
+                                        margin-top: 0;
+                                        margin-left: 50%;
+                                        transform: rotate(-45deg);
+                                    }
+                                    .tangramSection_18square_transition_cat{
+                                        margin-top: -100%;
+                                        margin-left: 50%;
+                                        transform: rotate(-45deg);
+                                    }
+                                    .tangramSection_18trapez_transition_cat{
+                                        margin-top: 0%;
+                                        margin-left: 100%;
+                                        transform: rotate(-45deg);
+                                    }
+                                    .tangramSection_18triangle_transition_cat{
+                                        margin-top: 0;
+                                        margin-left: 100%;
+                                        transform: rotate(-90deg);
+                                    }
+                                    .tangramSection_116triangle1_transition_cat{
+                                        margin-top: -150%;
+                                        margin-left: 50%;
+                                        transform: rotate(-135deg);
+                                    }
+                                    .tangramSection_116triangle2_transition_cat{
+                                        margin-top: -150%;
+                                        margin-left: 50%;
+                                        transform: rotate(45deg);
+                                    }
+
+
+
+
+                                    .tangramSection_14triangle1_transition_horse{
+                                        margin-top: -100%;
+                                        margin-left: 50%;
+                                        transform: rotate(180deg);
+                                    }
+                                    .tangramSection_14triangle2_transition_horse{
+                                        margin-top: -50%;
+                                        margin-left: 100%;
+                                        transform: rotate(-135deg);
+                                    }
+                                    .tangramSection_18square_transition_horse{
+                                        margin-top: -100%;
+                                        margin-left: 50%;
+                                        transform: rotate(-90deg);
+                                    }
+                                    .tangramSection_18trapez_transition_horse{
+                                        margin-top: -50%;
+                                        margin-left: 100%;
+                                        transform: rotate(85deg);
+                                    }
+                                    .tangramSection_18triangle_transition_horse{
+                                        margin-top: -171%;
+                                        margin-left: 15%;
+                                        transform: rotate(135deg);
+                                    }
+                                    .tangramSection_116triangle1_transition_horse{
+                                        margin-top: -100%;
+                                        margin-left: -20.7107%;
+                                        transform: rotate(135deg);
+                                    }
+                                    .tangramSection_116triangle2_transition_horse{
+                                        margin-top: 0;
+                                        margin-left: 50%;
+                                        transform: rotate(-90deg);
+                                    }
+.tangramSection_footer{
+    position: absolute;
+    height: 10%;
+    width: 100%;
+    display: flex;
+    bottom: 0;
+    flex-direction: horizontal;
+    justify-content: center;
+    background-color: #a1a19a;
+
+}
+.tangramSection_pictureSelector{
+    height: 25px;
+    width: 25px;
+    align-self: center;
+    background-color: #252822;
+    border-radius: 50%;
+    margin-right: 2%;
+    margin-left: 2%;
+    transition: all 0.3s;
+}
+.tangramSection_pictureSelector:hover{
+    background-color: #72905b;
+}
+
+
+
+
+
+
+
+
+
+.titleSection{
+    overflow: hidden;
+    flex-direction: column;
+}
+
+
+.titleSection_contentWrapper{
+    position: relative;
+    
+    height:90vh;
+    min-height: 800px;
+    width: 100%;
+    display: flex;
+    background-color: #252822;
+    justify-content: center;
+}
+.titleSection_contentWrapper img{
+    object-fit: contain;
+    height: inherit;
+    min-height: 800px;
+}
+
+
+.titleSection_topBar{
+    height: 10vh;
+    width: 100%;
+    position: relative;
+    background-color: #a1a19a;
+    display: flex;
+    font-size: 2em;
+    align-items: center;
+    font-family: arial;
+    color: #252822;
+}
+.titleSection_topBar_name{
+    margin-left: 5vh;
+    margin-right: auto;
+}
+.titleSection_topBar_aboutMe{
+    margin-right: 5vh;
+    margin-left:auto;
+    transition: all 0.1s ease-in-out;
+}
+.titleSection_topBar_aboutMe:hover{
+    color: green;
+}
+
+.titleSection_contentWrapper_welcome{
+    position: absolute;
+    font-size: calc(50px + 5vw);
+    color: #334129;
+    
+    align-self: center;
+}
+.titleSection_contentWrapper_welcomeWrapper{
+    display: flex;
+    position: absolute;
+    height: calc(100px + 7vw);
+    max-width: 600px;
+    width: 100%;
+    justify-content: center;
+    background-color: #d8d6d3;
+    border-radius: 20px;
+    margin-top: 5vh;
+}
+
+.titleSection_contentWrapper_instructions{
+    font-size: calc(20px + 1vw);
+    position: absolute;
+    
+    margin: 50px;
+    
+    color: #334129;
+    /*text-shadow: #d8d6d3 1px 0 1px;*/
+    
+}
+.titleSection_contentWrapper_instructionsWrapper{
+    display: inline-block;
+    position: absolute;
+    height: calc(300px + 7vw);
+    max-width: calc(600px + 7vw);
+    width: 100%;
+    background-color: #d8d6d3;
+    border-radius: 20px;
+    bottom: 0;
+    margin-bottom: 5vh;
+}
+.codeSection_explained{
+    position: relative;
+    align-self: center;
+    font-size: calc(50px + 5vw);
+    color: #334129;
+    margin-top: 5vh;
+    z-index: 999;
+}
+
+
+.aboutMeSection{
+    background-color: #d8d6d3;
+}
+
+.aboutMeSection_contentWrapper{
+    display:flex;
+    flex-wrap: wrap;
+}
+.aboutMeSection_title{
+    width:45%;
+    margin: 2.5%;
+    font-size: calc(50px + 6vw);
+
+    border-radius: 10px;
+    padding:2.5%;
+
+    background-color:#72905b;
+}
+.aboutMeSection_block1{
+    width:35%;
+    color: #d8d6d3;
+    margin: 2.5%;
+    font-size: calc(20px + 1vw);
+    background-color:#192213;
+    border-radius: 10px;
+    padding:2.5%;
+}
+.aboutMeSection_block2{
+    width:95%;
+    color: #d8d6d3;
+    font-size: calc(20px + 1vw);
+    margin: 40px;
+    background-color:#334129;
+    border-radius: 10px;
+    padding:2.5%;
+}
+
+
+
+    </style>
+</head>
+<body>
+    <div id="titleSection_id" class="section titleSection" onclick="titleSection_focus_click()">
+        <div class="titleSection_topBar">
+            
+            <span class="titleSection_topBar_name">Leo Sept</span>
+            <span class="titleSection_topBar_aboutMe" onclick="aboutMeSection_focus_click()">about me</span>
+        </div>
+        <div class="titleSection_contentWrapper">
+            <img src="backgroundImg2.jpg" alt="Metal workbench from birdseye view">
+            <div class="titleSection_contentWrapper_welcomeWrapper">
+            <span class="titleSection_contentWrapper_welcome">Welcome</span>
+             </div>
+             <div class="titleSection_contentWrapper_instructionsWrapper">
+            <span class="titleSection_contentWrapper_instructions">This website is made to showcase some of my abilities especially in terms of responsibility and mobile-functionality. 
+                <br />
+                <br />
+            So feel free to resize the screen to your liking and click the sections to focus on them. </span>
+             </div>
+        </div>
+
+        
+
+        <div class="titleSection_welcomeBox">
+        </div>
+
+        <div class="titleSection_instructionText">
+        </div>
+    </div>
+    
+    <div id="tangramSection_id" class="section tangramSection" onclick="tangramSection_transition_click()">
+        <div class="tangramSection_tangramWrapper">  
+            <div class="tangramSection_tangramElement tangramSection_14triangle1" id="tangramSection_14triangle1_id">  <!-- 1/4 1-->
+            </div>
+            <div class="tangramSection_tangramElement tangramSection_14triangle2" id="tangramSection_14triangle2_id">  <!-- 1/4 2-->
+            </div>
+            <div class="tangramSection_tangramElement tangramSection_18square" id="tangramSection_18square_id">  <!-- 1/8 square-->
+            </div>
+            <div class="tangramSection_tangramElement tangramSection_18trapez" id="tangramSection_18trapez_id">  <!-- 1/8 trapez-->
+            </div>
+            <div class="tangramSection_tangramElement tangramSection_18triangle" id="tangramSection_18triangle_id">  <!-- 1/8 triangle-->
+            </div>
+            <div class="tangramSection_tangramElement tangramSection_116triangle1" id="tangramSection_116triangle1_id">  <!-- 1/16 triangle-->
+            </div>
+            <div class="tangramSection_tangramElement tangramSection_116triangle2" id="tangramSection_116triangle2_id">  <!-- 1/16 triangle-->
+            </div>
+        </div>
+                
+        <div class ="tangramSection_footer">
+            <div class ="tangramSection_pictureSelector" onclick="tangramSection_transition_selected(0)"></div>
+            <div class ="tangramSection_pictureSelector" onclick="tangramSection_transition_selected(1)"> </div>
+            <div class ="tangramSection_pictureSelector" onclick="tangramSection_transition_selected(2)"></div>
+            <div class ="tangramSection_pictureSelector" onclick="tangramSection_transition_selected(3)"></div>
+            <div class ="tangramSection_pictureSelector" onclick="tangramSection_transition_selected(4)"> </div>
+        </div>
+
+    </div>
+
+    <span class="codeSection_explained"> Code of this section: </span>
+
+<div  onclick="codeSection_focus_click()" class="section codeSection" id="codeSection_id">
+    
+    <div class="codeSection_absoluteRevealer" id="codeSection_absoluteRevealer_id">
+        </div>
+        <div class="codeSection_stickyRevealer" id="codeSection_stickyRevealer_id">
+        </div>    
+        
+        <div  onmouseleave="codeSection_makeUnReadable_hover()"  onmouseenter="codeSection_makeReadable_hover()" class="codeSection_codeText" id="codeSection_codeText_id">
+            <pre>
+                <code class="language-css">
+                                            <!--this code-->
+                                            &lt;html lang=&quot;en-US&quot;&gt;
+                                            &lt;head&gt;
+                                            &lt;link href=&quot;prism.css&quot; rel=&quot;stylesheet&quot; /&gt;
+                                            &lt;style&gt;
+                                            
+                                            .spacer{
+                                                margin:50vh;
+                                            }
+                                            
+                                            
+                                            
+                                            .section{
+                                                display: flex;
+                                                min-height: 100vh;
+                                                width: 100%;
+                                                margin-bottom: 10%;
+                                                background-color: #252822;
+                                            }
+                                            
+                                            .codeSection {
+                                                width: 100%;
+                                                height: 100vh;
+                                                display: flex;
+                                                flex-direction: vertical;
+                                                align-items: start;
+                                                flex-wrap: wrap;
+                                                scrollbar-width: none;
+                                            }
+                                            .codeSection_codeText{
+                                                position:absolute;
+                                                width: 100%;
+                                                height: 100%;
+                                                align-self: center;
+                                                overflow-x: scroll;
+                                                overflow-y: scroll;
+                                                scrollbar-width: none;
+                                                overscroll-behavior: auto;
+                                            }
+                                            
+                                            .codeSection_absoluteRevealer{
+                                                position: absolute;
+                                                width: 100%;
+                                                height: 50vh;
+                                                overflow: hidden;
+                                            
+                                                background-color: #72905b;
+                                                clip-path: polygon( 0% 0%, 0% 0%, 100% 0%, 100% 100% );
+                                                z-index: 1;
+                                                transition: all 1s ease-out;
+                                                
+                                            }
+                                            .codeSection_stickyRevealer{
+                                                overflow: hidden;
+                                                
+                                                position: sticky;
+                                                width: 100%;
+                                                height: 50vh;
+                                                clip-path: polygon( 0% 0%, 0% 0%, 100% 100%, 0% 100% );
+                                                z-index: 1;
+                                                background-color: #222b1b;
+                                                top: 50vh;
+                                            
+                                                transition: all 1s ease-out;
+                                            }
+                                            .codeSection_stickyRevealer_transition_hover{
+                                                clip-path: polygon( 0% 50%, 50% 100%, 50% 100%/*extra one*/, 0% 100% );
+                                                opacity: 0.7;
+                                                background-color: #72905b;
+                                            }
+                                            .codeSection_absoluteRevealer_transition_hover{
+                                                clip-path: polygon( /*extra one*/50% 0%, 50% 0%, 100% 0%, 100% 50%  );
+                                                opacity: 0.7;
+                                                background-color: #222b1b;
+                                            }
+                                            .codeSection_stickyRevealer_transition_click{
+                                                clip-path: polygon( 0% 80%, 100% 80%, 100% 100%/*extra one*/, 0% 100% );
+                                                /*remember: stickyRevealer point coordinates are also measured with upper left coordinate system -&gt; thats why other % numbers*/
+                                                opacity: 0.7;
+                                                background-color: black;
+                                            }
+                                            .codeSection_absoluteRevealer_transition_click{
+                                                clip-path: polygon( /*extra one*/0% 20%, 0% 0%, 100% 0%, 100% 20%  );
+                                                opacity: 0.7;
+                                                background-color: black;
+                                            }
+                                            
+                                            
+                                            &lt;/style&gt;
+                                            &lt;/head&gt;
+                                            &lt;body&gt;
+                                                &lt;div class=&quot;spacer&quot;&gt;&lt;/div&gt;
+                                            &lt;div  onclick=&quot;codeSection_focus_click()&quot; class=&quot;section codeSection&quot; id=&quot;codeSection_id&quot;&gt;
+                                                
+                                                &lt;div class=&quot;codeSection_absoluteRevealer&quot; id=&quot;codeSection_absoluteRevealer_id&quot;&gt;
+                                                    &lt;/div&gt;
+                                                    &lt;div class=&quot;codeSection_stickyRevealer&quot; id=&quot;codeSection_stickyRevealer_id&quot;&gt;
+                                                    &lt;/div&gt;    
+                                                    
+                                                    &lt;div  onmouseleave=&quot;codeSection_makeUnReadable_hover()&quot;  onmouseenter=&quot;codeSection_makeReadable_hover()&quot; class=&quot;codeSection_codeText&quot; id=&quot;codeSection_codeText_id&quot;&gt;
+                                                        &lt;pre&gt;
+                                                            &lt;code class=&quot;language-css&quot;&gt;
+                                                                                 &lt;!--this code--&gt;
+                                                                                 Lorem ipsum dolor sit amet, consetetur 
+                                                                                 sadipscing elitr, sed diam nonumy eirmod 
+                                                                                 tempor invidunt ut labore et dolore magna 
+                                                                                 aliquyam erat, sed diam voluptua. At vero 
+                                                                                 eos et accusam et justo duo dolores et ea 
+                                                                                 rebum. Stet clita kasd gubergren, no sea 
+                                                                                 takimata sanctus est Lorem ipsum dolor sit 
+                                                                                 amet. Lorem ipsum dolor sit amet, consetetur 
+                                                                                 sadipscing elitr, sed diam nonumy eirmod tempor 
+                                                                                 invidunt ut labore et dolore magna aliquyam 
+                                                                                 erat, sed diam voluptua. At vero eos et 
+                                                                                 accusam et justo duo dolores et ea rebum. 
+                                                                                 Stet clita kasd gubergren, no sea takimata s
+                                                                                 anctus est Lorem ipsum dolor sit amet.
+                                                                                 Lorem ipsum dolor sit amet, consetetur 
+                                                                                 sadipscing elitr, sed diam nonumy eirmod 
+                                                                                 tempor invidunt ut labore et dolore magna 
+                                                                                 aliquyam erat, sed diam voluptua. At vero 
+                                                                                 eos et accusam et justo duo dolores et ea 
+                                                                                 rebum. Stet clita kasd gubergren, no sea 
+                                                                                 takimata sanctus est Lorem ipsum dolor sit 
+                                                                                 amet. Lorem ipsum dolor sit amet, consetetur 
+                                                                                 sadipscing elitr, sed diam nonumy eirmod tempor 
+                                                                                 invidunt ut labore et dolore magna aliquyam 
+                                                                                 erat, sed diam voluptua. At vero eos et 
+                                                                                 accusam et justo duo dolores et ea rebum. 
+                                                                                 Stet clita kasd gubergren, no sea takimata s
+                                                                                 anctus est Lorem ipsum dolor sit amet.
+                                            
+                                                                                 Lorem ipsum dolor sit amet, consetetur 
+                                                                                 sadipscing elitr, sed diam nonumy eirmod 
+                                                                                 tempor invidunt ut labore et dolore magna 
+                                                                                 aliquyam erat, sed diam voluptua. At vero 
+                                                                                 eos et accusam et justo duo dolores et ea 
+                                                                                 rebum. Stet clita kasd gubergren, no sea 
+                                                                                 takimata sanctus est Lorem ipsum dolor sit 
+                                                                                 amet. Lorem ipsum dolor sit amet, consetetur 
+                                                                                 sadipscing elitr, sed diam nonumy eirmod tempor 
+                                                                                 invidunt ut labore et dolore magna aliquyam 
+                                                                                 erat, sed diam voluptua. At vero eos et 
+                                                                                 accusam et justo duo dolores et ea rebum. 
+                                                                                 Stet clita kasd gubergren, no sea takimata s
+                                                                                 anctus est Lorem ipsum dolor sit amet.
+                                                                                 Lorem ipsum dolor sit amet, consetetur 
+                                                                                 sadipscing elitr, sed diam nonumy eirmod 
+                                                                                 tempor invidunt ut labore et dolore magna 
+                                                                                 aliquyam erat, sed diam voluptua. At vero 
+                                                                                 eos et accusam et justo duo dolores et ea 
+                                                                                 rebum. Stet clita kasd gubergren, no sea 
+                                                                                 takimata sanctus est Lorem ipsum dolor sit 
+                                                                                 amet. Lorem ipsum dolor sit amet, consetetur 
+                                                                                 sadipscing elitr, sed diam nonumy eirmod tempor 
+                                                                                 invidunt ut labore et dolore magna aliquyam 
+                                                                                 erat, sed diam voluptua. At vero eos et 
+                                                                                 accusam et justo duo dolores et ea rebum. 
+                                                                                 Stet clita kasd gubergren, no sea takimata s
+                                                                                 anctus est Lorem ipsum dolor sit amet.
+                                            
+                                            
+                                                            &lt;/code&gt;
+                                                         &lt;/pre&gt;
+                                                    &lt;/div&gt;
+                                            &lt;/div&gt;
+                                                &lt;div class=&quot;spacer&quot;&gt;&lt;/div&gt;
+                                            &lt;script src=&quot;prism.js&quot;&gt;
+                                                &lt;/script&gt;
+                                            &lt;script&gt;
+                                            var codeSection_index_click = 0;
+                                                    function codeSection_makeReadable_hover(){
+                                                        document.getElementById(&quot;codeSection_stickyRevealer_id&quot;).classList.add(&quot;codeSection_stickyRevealer_transition_hover&quot;);
+                                                        document.getElementById(&quot;codeSection_absoluteRevealer_id&quot;).classList.add(&quot;codeSection_absoluteRevealer_transition_hover&quot;);
+                                                    }
+                                                    
+                                                    
+                                                    function codeSection_makeUnReadable_hover(){
+                                                        document.getElementById(&quot;codeSection_stickyRevealer_id&quot;).classList.remove(&quot;codeSection_stickyRevealer_transition_hover&quot;);
+                                                        document.getElementById(&quot;codeSection_absoluteRevealer_id&quot;).classList.remove(&quot;codeSection_absoluteRevealer_transition_hover&quot;);
+                                                    }
+                                            
+                                                    function codeSection_focus_click(){
+                                                        if(codeSection_index_click == 0){
+                                                        document.getElementById(&quot;codeSection_stickyRevealer_id&quot;).classList.add(&quot;codeSection_stickyRevealer_transition_click&quot;);
+                                                        document.getElementById(&quot;codeSection_absoluteRevealer_id&quot;).classList.add(&quot;codeSection_absoluteRevealer_transition_click&quot;);
+                                                        codeSection_index_click ++;
+                                                        document.getElementById(&quot;codeSection_id&quot;).scrollIntoView({behavior: &quot;smooth&quot;});
+                                                        document.getElementById(&quot;codeSection_codeText_id&quot;).style[&quot;overscroll-behavior&quot;] = &quot;none&quot;;
+                                                    }
+                                                        else {
+                                                        document.getElementById(&quot;codeSection_stickyRevealer_id&quot;).classList.remove(&quot;codeSection_stickyRevealer_transition_click&quot;);
+                                                        document.getElementById(&quot;codeSection_absoluteRevealer_id&quot;).classList.remove(&quot;codeSection_absoluteRevealer_transition_click&quot;);
+                                                        codeSection_index_click = 0;
+                                                        document.getElementById(&quot;codeSection_id&quot;).scrollIntoView({behavior: &quot;smooth&quot;});
+                                                        document.getElementById(&quot;codeSection_codeText_id&quot;).style[&quot;overscroll-behavior&quot;] = &quot;auto&quot;;
+                                                        
+                                                        }
+                                                    }
+                                                    function codeSection_unFocus(){
+                                                        
+                                                        document.getElementById(&quot;codeSection_stickyRevealer_id&quot;).classList.remove(&quot;codeSection_stickyRevealer_transition_click&quot;);
+                                                        document.getElementById(&quot;codeSection_absoluteRevealer_id&quot;).classList.remove(&quot;codeSection_absoluteRevealer_transition_click&quot;);
+                                                        codeSection_index_click = 0;
+                                                        document.getElementById(&quot;codeSection_codeText_id&quot;).style[&quot;overscroll-behavior&quot;] = &quot;auto&quot;;
+                                                        
+                                                    }
+                                            &lt;/script&gt;
+                                            &lt;/body&gt;
+                                            
+
+                </code>
+             </pre>
+        </div>
+</div>
+    <div id="aboutMeSection_id"class="section aboutMeSection" onclick="aboutMeSection_focus_click()">
+
+
+        <div class="aboutMeSection_contentWrapper">
+            <span class="aboutMeSection_block1"> My name is Leo Sept and I aspire to use my coding skills to help build websites for companies or individuals. Here is a link to my 
+                <a href="https://www.upwork.com/freelancers/~01b48fc073c987d194">upwork </a>Profile
+                </span>
+            <span class="aboutMeSection_title"> About Me </span>
+            
+            <span class="aboutMeSection_block2"> I am currently going to school and am in the last year of doing my abitur. After that I will be able to pursue
+                a degree in computer science.
+                Because of that I see website development as a side hobby of mine which I can learn in the meantime before I will
+                start going to university.</span>
+
+
+        </div>
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <script>
+function aboutMeSection_focus_click(){
+    document.getElementById("aboutMeSection_id").scrollIntoView({behavior: "smooth"});
+}
+function titleSection_focus_click(){
+    document.getElementById("titleSection_id").scrollIntoView({behavior: "smooth"});
+}
+
+        
+    </script>
+     <script src="prism.js">
+    </script>
+    <script>
+
+
+        var tangramSection_transition_removeOrAdd = 0;
+        var tangramSection_index_figurenum = 0;
+         var tangramSection_index_selectedFigurenum = 0;
+        var selectedFigure = 0;
+        /*initialize with arranged figures*/
+        tangramSection_standart();
+
+        function tangramSection_transition_execute(tangramSection_index_selectedFigurenum){
+            if(tangramSection_index_selectedFigurenum == 0){
+                tangramSection_standart();
+                tangramSection_index_figurenum = 0;
+            }
+            else if(tangramSection_index_selectedFigurenum == 1){
+                tangramSection_whale();
+                tangramSection_index_figurenum = 1;
+            }
+            else if(tangramSection_index_selectedFigurenum == 2){
+                tangramSection_bear();
+                tangramSection_index_figurenum = 2;
+            }
+            else if(tangramSection_index_selectedFigurenum == 3){
+                tangramSection_cat();
+                tangramSection_index_figurenum = 3;
+            }
+            else if(tangramSection_index_selectedFigurenum == 4){
+                tangramSection_horse();
+                tangramSection_index_figurenum = 4;
+            }
+        }
+        function tangramSection_transition_selected(selectedFigure){
+            tangramSection_transition_removeOrAdd = 1;
+            tangramSection_transition_execute(tangramSection_index_figurenum);
+
+            tangramSection_transition_removeOrAdd = 0;
+            tangramSection_index_figurenum = selectedFigure;
+            tangramSection_transition_execute(selectedFigure);
+
+        }
+        function tangramSection_transition_click(){
+            tangramSection_focus_click()
+            
+            
+            
+            tangramSection_transition_removeOrAdd = 1;
+            tangramSection_transition_execute(tangramSection_index_figurenum);
+            tangramSection_index_figurenum++;
+            if(tangramSection_index_figurenum > 4){
+                tangramSection_index_figurenum = 0;
+                console.log(tangramSection_index_figurenum);
+            }
+            tangramSection_transition_removeOrAdd = 0;
+            tangramSection_transition_execute(tangramSection_index_figurenum);
+
+        }
+
+
+
+
+
+
+        function tangramSection_standart(){
+            if(tangramSection_transition_removeOrAdd == 0){
+
+document.getElementById("tangramSection_14triangle1_id").classList.add("tangramSection_14triangle1_transition_standart");
+document.getElementById("tangramSection_14triangle2_id").classList.add("tangramSection_14triangle2_transition_standart");
+document.getElementById("tangramSection_18square_id").classList.add("tangramSection_18square_transition_standart");
+document.getElementById("tangramSection_18trapez_id").classList.add("tangramSection_18trapez_transition_standart");
+document.getElementById("tangramSection_18triangle_id").classList.add("tangramSection_18triangle_transition_standart");
+document.getElementById("tangramSection_116triangle1_id").classList.add("tangramSection_116triangle1_transition_standart");
+document.getElementById("tangramSection_116triangle2_id").classList.add("tangramSection_116triangle2_transition_standart");
+            
+}
+else{
+
+document.getElementById("tangramSection_14triangle1_id").classList.remove("tangramSection_14triangle1_transition_standart");
+document.getElementById("tangramSection_14triangle2_id").classList.remove("tangramSection_14triangle2_transition_standart");
+document.getElementById("tangramSection_18square_id").classList.remove("tangramSection_18square_transition_standart");
+document.getElementById("tangramSection_18trapez_id").classList.remove("tangramSection_18trapez_transition_standart");
+document.getElementById("tangramSection_18triangle_id").classList.remove("tangramSection_18triangle_transition_standart");
+document.getElementById("tangramSection_116triangle1_id").classList.remove("tangramSection_116triangle1_transition_standart");
+document.getElementById("tangramSection_116triangle2_id").classList.remove("tangramSection_116triangle2_transition_standart");
+
+}
+        }
+
+function tangramSection_whale(){
+            if(tangramSection_transition_removeOrAdd == 0){
+
+document.getElementById("tangramSection_14triangle1_id").classList.add("tangramSection_14triangle1_transition_whale");
+document.getElementById("tangramSection_14triangle2_id").classList.add("tangramSection_14triangle2_transition_whale");
+document.getElementById("tangramSection_18square_id").classList.add("tangramSection_18square_transition_whale");
+document.getElementById("tangramSection_18trapez_id").classList.add("tangramSection_18trapez_transition_whale");
+document.getElementById("tangramSection_18triangle_id").classList.add("tangramSection_18triangle_transition_whale");
+document.getElementById("tangramSection_116triangle1_id").classList.add("tangramSection_116triangle1_transition_whale");
+document.getElementById("tangramSection_116triangle2_id").classList.add("tangramSection_116triangle2_transition_whale");
+         
+}
+else{
+
+document.getElementById("tangramSection_14triangle1_id").classList.remove("tangramSection_14triangle1_transition_whale");
+document.getElementById("tangramSection_14triangle2_id").classList.remove("tangramSection_14triangle2_transition_whale");
+document.getElementById("tangramSection_18square_id").classList.remove("tangramSection_18square_transition_whale");
+document.getElementById("tangramSection_18trapez_id").classList.remove("tangramSection_18trapez_transition_whale");
+document.getElementById("tangramSection_18triangle_id").classList.remove("tangramSection_18triangle_transition_whale");
+document.getElementById("tangramSection_116triangle1_id").classList.remove("tangramSection_116triangle1_transition_whale");
+document.getElementById("tangramSection_116triangle2_id").classList.remove("tangramSection_116triangle2_transition_whale");
+
+}
+}
+
+
+function tangramSection_bear(){
+    
+    
+    if(tangramSection_transition_removeOrAdd == 0){
+document.getElementById("tangramSection_14triangle1_id").classList.add("tangramSection_14triangle1_transition_bear");
+document.getElementById("tangramSection_14triangle2_id").classList.add("tangramSection_14triangle2_transition_bear");
+document.getElementById("tangramSection_18square_id").classList.add("tangramSection_18square_transition_bear");
+document.getElementById("tangramSection_18trapez_id").classList.add("tangramSection_18trapez_transition_bear");
+document.getElementById("tangramSection_18triangle_id").classList.add("tangramSection_18triangle_transition_bear");
+document.getElementById("tangramSection_116triangle1_id").classList.add("tangramSection_116triangle1_transition_bear");
+document.getElementById("tangramSection_116triangle2_id").classList.add("tangramSection_116triangle2_transition_bear");
+         
+}
+else {
+document.getElementById("tangramSection_14triangle1_id").classList.remove("tangramSection_14triangle1_transition_bear");
+document.getElementById("tangramSection_14triangle2_id").classList.remove("tangramSection_14triangle2_transition_bear");
+document.getElementById("tangramSection_18square_id").classList.remove("tangramSection_18square_transition_bear");
+document.getElementById("tangramSection_18trapez_id").classList.remove("tangramSection_18trapez_transition_bear");
+document.getElementById("tangramSection_18triangle_id").classList.remove("tangramSection_18triangle_transition_bear");
+document.getElementById("tangramSection_116triangle1_id").classList.remove("tangramSection_116triangle1_transition_bear");
+document.getElementById("tangramSection_116triangle2_id").classList.remove("tangramSection_116triangle2_transition_bear");
+
+}
+}
+
+
+function tangramSection_cat(){
+    
+    
+    if(tangramSection_transition_removeOrAdd == 0){
+document.getElementById("tangramSection_14triangle1_id").classList.add("tangramSection_14triangle1_transition_cat");
+document.getElementById("tangramSection_14triangle2_id").classList.add("tangramSection_14triangle2_transition_cat");
+document.getElementById("tangramSection_18square_id").classList.add("tangramSection_18square_transition_cat");
+document.getElementById("tangramSection_18trapez_id").classList.add("tangramSection_18trapez_transition_cat");
+document.getElementById("tangramSection_18triangle_id").classList.add("tangramSection_18triangle_transition_cat");
+document.getElementById("tangramSection_116triangle1_id").classList.add("tangramSection_116triangle1_transition_cat");
+document.getElementById("tangramSection_116triangle2_id").classList.add("tangramSection_116triangle2_transition_cat");
+          
+}
+else {
+document.getElementById("tangramSection_14triangle1_id").classList.remove("tangramSection_14triangle1_transition_cat");
+document.getElementById("tangramSection_14triangle2_id").classList.remove("tangramSection_14triangle2_transition_cat");
+document.getElementById("tangramSection_18square_id").classList.remove("tangramSection_18square_transition_cat");
+document.getElementById("tangramSection_18trapez_id").classList.remove("tangramSection_18trapez_transition_cat");
+document.getElementById("tangramSection_18triangle_id").classList.remove("tangramSection_18triangle_transition_cat");
+document.getElementById("tangramSection_116triangle1_id").classList.remove("tangramSection_116triangle1_transition_cat");
+document.getElementById("tangramSection_116triangle2_id").classList.remove("tangramSection_116triangle2_transition_cat");
+
+}
+}
+
+
+function tangramSection_horse(){
+    console.log("testing")
+    
+    if(tangramSection_transition_removeOrAdd == 0){
+document.getElementById("tangramSection_14triangle1_id").classList.add("tangramSection_14triangle1_transition_horse");
+document.getElementById("tangramSection_14triangle2_id").classList.add("tangramSection_14triangle2_transition_horse");
+document.getElementById("tangramSection_18square_id").classList.add("tangramSection_18square_transition_horse");
+document.getElementById("tangramSection_18trapez_id").classList.add("tangramSection_18trapez_transition_horse");
+document.getElementById("tangramSection_18triangle_id").classList.add("tangramSection_18triangle_transition_horse");
+document.getElementById("tangramSection_116triangle1_id").classList.add("tangramSection_116triangle1_transition_horse");
+document.getElementById("tangramSection_116triangle2_id").classList.add("tangramSection_116triangle2_transition_horse");
+          
+}
+else {
+document.getElementById("tangramSection_14triangle1_id").classList.remove("tangramSection_14triangle1_transition_horse");
+document.getElementById("tangramSection_14triangle2_id").classList.remove("tangramSection_14triangle2_transition_horse");
+document.getElementById("tangramSection_18square_id").classList.remove("tangramSection_18square_transition_horse");
+document.getElementById("tangramSection_18trapez_id").classList.remove("tangramSection_18trapez_transition_horse");
+document.getElementById("tangramSection_18triangle_id").classList.remove("tangramSection_18triangle_transition_horse");
+document.getElementById("tangramSection_116triangle1_id").classList.remove("tangramSection_116triangle1_transition_horse");
+document.getElementById("tangramSection_116triangle2_id").classList.remove("tangramSection_116triangle2_transition_horse");
+
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+function tangramSection_focus_click(){
+    document.getElementById("tangramSection_id").scrollIntoView({behavior: "smooth"});
+}
+
+        var codeSection_index_click = 0;
+        function codeSection_makeReadable_hover(){
+            document.getElementById("codeSection_stickyRevealer_id").classList.add("codeSection_stickyRevealer_transition_hover");
+            document.getElementById("codeSection_absoluteRevealer_id").classList.add("codeSection_absoluteRevealer_transition_hover");
+        }
+        
+        
+        function codeSection_makeUnReadable_hover(){
+            document.getElementById("codeSection_stickyRevealer_id").classList.remove("codeSection_stickyRevealer_transition_hover");
+            document.getElementById("codeSection_absoluteRevealer_id").classList.remove("codeSection_absoluteRevealer_transition_hover");
+        }
+
+        function codeSection_focus_click(){
+            if(codeSection_index_click == 0){
+            document.getElementById("codeSection_stickyRevealer_id").classList.add("codeSection_stickyRevealer_transition_click");
+            document.getElementById("codeSection_absoluteRevealer_id").classList.add("codeSection_absoluteRevealer_transition_click");
+            codeSection_index_click ++;
+            document.getElementById("codeSection_id").scrollIntoView({behavior: "smooth"});
+            document.getElementById("codeSection_codeText_id").style["overscroll-behavior"] = "none";
+        }
+            else {
+            document.getElementById("codeSection_stickyRevealer_id").classList.remove("codeSection_stickyRevealer_transition_click");
+            document.getElementById("codeSection_absoluteRevealer_id").classList.remove("codeSection_absoluteRevealer_transition_click");
+            codeSection_index_click = 0;
+            document.getElementById("codeSection_id").scrollIntoView({behavior: "smooth"});
+            document.getElementById("codeSection_codeText_id").style["overscroll-behavior"] = "auto";
+            
+            }
+        }
+        function codeSection_unFocus(){
+            
+            document.getElementById("codeSection_stickyRevealer_id").classList.remove("codeSection_stickyRevealer_transition_click");
+            document.getElementById("codeSection_absoluteRevealer_id").classList.remove("codeSection_absoluteRevealer_transition_click");
+            codeSection_index_click = 0;
+            document.getElementById("codeSection_codeText_id").style["overscroll-behavior"] = "auto";
+            
+        }
+
+        
+    </script>
+
+</body>
